@@ -1,9 +1,8 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
 import serverless from 'serverless-http';
 import { ExpressAdapter } from '@nestjs/platform-express';
-import * as express from 'express';
-
+import express from 'express'; // default import
+import { AppModule } from 'src/app.module';
 const expressApp = express();
 const adapter = new ExpressAdapter(expressApp);
 
