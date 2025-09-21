@@ -11,9 +11,12 @@
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
+    "rootDir": "./src",
     "outDir": "./dist",
-    "rootDir": ".",
     "baseUrl": "./",
+    "paths": {
+      "src/*": ["./src/*"]
+    },
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": true,
@@ -23,5 +26,6 @@
     "noFallthroughCasesInSwitch": false,
     "strict": false,
     "resolveJsonModule": true
-  }
+  },
+  "exclude": ["node_modules", "dist", "test"]
 }
