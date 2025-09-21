@@ -7,19 +7,16 @@ exports.default = handler;
 const core_1 = require("@nestjs/core");
 const platform_express_1 = require("@nestjs/platform-express");
 const express_1 = __importDefault(require("express"));
-const app_module_1 = require("src/app.module");
-const expressApp = (0, express_1.default)();
-const adapter = new platform_express_1.ExpressAdapter(expressApp);
-async function bootstrap() {
-    const app = await core_1.NestFactory.create(app_module_1.AppModule, adapter);
-    app.enableCors();
-    await app.init();
-    return expressApp;
-}
-let server;
+const app_module_1 = require("./src/app.module");
+const server = (0, express_1.default)();
+let initialized = false;
 async function handler(req, res) {
-    if (!server)
-        server = await bootstrap();
-    return server(req, res);
+    if (!initialized) {
+        const app = await core_1.NestFactory.create(app_module_1.AppModule, new platform_express_1.ExpressAdapter(server));
+        app.enableCors();
+        await app.init();
+        initialized = true;
+    }
+    server(req, res);
 }
 //# sourceMappingURL=serverless.js.map
